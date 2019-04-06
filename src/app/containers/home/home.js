@@ -21,7 +21,7 @@ import {
 
 const Home = (props) => {
   console.log(props)
-  const onUp = () => props.dispatch(ADD_POSTS);
+  const onUp = () => props.getPosts();
   const onDown = () => props.deletePosts();
 
   return (
@@ -33,11 +33,11 @@ const Home = (props) => {
   )
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return ({
-//     getPosts: () => { dispatch(ADD_POSTS) }
-//   })
-// }
+const mapDispatchToProps = (dispatch) => {
+  return ({
+    getPosts: () => { dispatch({ type: ADD_POSTS }) }
+  })
+}
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -46,4 +46,4 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-export default connect(mapStateToProps, { ADD_POSTS })(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
